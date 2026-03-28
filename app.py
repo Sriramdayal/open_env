@@ -5,7 +5,7 @@ from pydantic import BaseModel
 import sys
 import os
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from models import Action, Observation, State
 from server.llm_env import LLMEnv
@@ -31,7 +31,7 @@ default_env = LLMEnv()
 
 @app.get("/", response_class=HTMLResponse)
 async def serve_gui():
-    path = os.path.join(os.path.dirname(__file__), "..", "index.html")
+    path = os.path.join(os.path.dirname(__file__), "index.html")
     try:
         with open(path, "r") as f:
             return f.read()
@@ -88,7 +88,7 @@ async def run_baseline():
     import subprocess
     try:
         # baseline.py should be in the directory above server
-        baseline_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "baseline.py")
+        baseline_path = os.path.join(os.path.dirname(__file__), "baseline.py")
         result = subprocess.run([sys.executable, baseline_path], capture_output=True, text=True, check=True)
         # Parse the output to return the dict
         # We expect JSON or eval-able output from baseline, or simply look at the final prints
