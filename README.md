@@ -1,4 +1,4 @@
-# LLM Control Environment
+# open_env (LLM Control Environment)
 
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
 ![Version](https://img.shields.io/badge/version-1.0-blue)
@@ -21,8 +21,8 @@ It supports three difficulty levels ("tasks"):
 ### Installation
 
 ```bash
-git clone https://github.com/blackshark279/llm-control-env.git
-cd llm-control-env
+git clone https://github.com/Sriramdayal/open_env.git
+cd open_env
 pip install -r requirements.txt
 ```
 
@@ -68,3 +68,4 @@ This baseline script replaces manual choices with a heuristic and queries the lo
 ## Citation
 * OpenEnv specification: [Meta OpenEnv](https://github.com/meta-pytorch/OpenEnv)
 * Detroit: Become Human hallucination mechanics for reward shaping.
+
