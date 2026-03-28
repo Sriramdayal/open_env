@@ -1,3 +1,13 @@
+---
+title: Open Env
+emoji: 🐢
+colorFrom: yellow
+colorTo: green
+sdk: docker
+pinned: false
+license: mit
+---
+
 # open_env (LLM Control Environment)
 
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
@@ -68,4 +78,3 @@ This baseline script replaces manual choices with a heuristic and queries the lo
 ## Citation
 * OpenEnv specification: [Meta OpenEnv](https://github.com/meta-pytorch/OpenEnv)
 * Detroit: Become Human hallucination mechanics for reward shaping.
-
