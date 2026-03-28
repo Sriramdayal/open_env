@@ -137,3 +137,7 @@ async def get_tasks():
         "tasks": ["easy", "medium", "hard"],
         "action_schema": Action.model_json_schema()
     }
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=7860)
