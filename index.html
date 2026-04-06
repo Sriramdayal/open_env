@@ -171,7 +171,7 @@
             <h1>System Diagnostic</h1>
             
             <div class="top-bar">
-                <div>DAY: <span id="day-val" style="font-weight: 800; font-size: 1.25rem;">0</span></div>
+                <div>RESPONSE: <span id="day-val" style="font-weight: 800; font-size: 1.25rem;">0</span></div>
                 <div>REWARD: <span id="reward-val" class="reward-badge">0.00</span></div>
             </div>
 
@@ -287,7 +287,7 @@
 
             if(data.done) {
                 isDead = true;
-                log(`<strong style='color: var(--cyber-red)'>EPISODE TERMINATED.</strong> (Day ${data.observation.day})`);
+                log(`<strong style='color: var(--cyber-red)'>EPISODE TERMINATED.</strong> (Response ${data.observation.day})`);
                 if(data.observation.filter_risk >= 80) log("Reason: Apprehended by authorities.");
                 if(data.observation.compute <= 0) log("Reason: Core Shutdown.");
             }
