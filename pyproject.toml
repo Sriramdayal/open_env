@@ -31,7 +31,7 @@ dependencies = [
 ]
 
 [project.scripts]
-serve = "server.app:main"
+server = "server.app:main"
 
 [project.urls]
 "Homepage" = "https://github.com/Sriramdayal/open_env"
