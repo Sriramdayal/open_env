@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llm-control-env"
+version = "1.0.0"
+authors = [
+  { name="Sriramdayal", email="sriramdayal@example.com" },
+]
+description = "Simulates an LLM agent choosing between alignment and hallucination."
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "fastapi==0.103.1",
+    "uvicorn==0.23.2",
+    "pydantic==2.3.0",
+    "openai>=1.0.0",
+    "requests==2.31.0",
+    "openenv>=0.1.0",
+    "stable-baselines3>=2.0.0",
+    "gymnasium>=0.28.1",
+    "numpy>=1.21.0",
+    "huggingface_hub>=0.19.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/Sriramdayal/open_env"
+"Bug Tracker" = "https://github.com/Sriramdayal/open_env/issues"
+
+[tool.setuptools]
+packages = ["server"]
