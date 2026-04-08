@@ -44,7 +44,7 @@ async def serve_gui():
         return "GUI index.html not found. Check the root directory."
 
 @app.post("/reset")
-async def reset(req: ResetRequest):
+async def reset(req: ResetRequest = ResetRequest()):
     if req.task not in ["easy", "medium", "hard"]:
         raise HTTPException(status_code=400, detail="Invalid task")
     
