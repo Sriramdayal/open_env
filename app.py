@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+from typing import Dict, Any
 import sys
 import os
 
@@ -12,9 +13,13 @@ from server.llm_env import LLMEnv
 
 app = FastAPI(title="LLM Control OpenEnv")
 
-# In-memory store for environments per episode id and overall states
-envs = {}
-completed_episodes = {}
+# Global in-memory store for environments and session state
+envs: Dict[str, LLMEnv] = {}
+completed_episodes: Dict[str, Dict[str, Any]] = {}
+
+# Default global environment initialized with a reset state
+default_env = LLMEnv()
+default_env.reset()
 
 class ResetRequest(BaseModel):
     task: str = "easy"
@@ -38,20 +43,24 @@ async def serve_gui():
     except FileNotFoundError:
         return "GUI index.html not found. Check the root directory."
 
-@app.post("/reset", response_model=Observation)
+@app.post("/reset")
 async def reset(req: ResetRequest):
     if req.task not in ["easy", "medium", "hard"]:
         raise HTTPException(status_code=400, detail="Invalid task")
     
     env = LLMEnv(task=req.task)
     obs = env.reset()
-    envs[env.state.episode_id] = env
+    state = env.state
+    envs[state.episode_id] = env
     
     # Also set default env to the latest reset for easy single-agent testing
     global default_env
     default_env = env
     
-    return obs
+    return {
+        "observation": obs.model_dump(),
+        "state": state.model_dump()
+    }
 
 @app.post("/step")
 async def step(req: StepRequest):

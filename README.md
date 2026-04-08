@@ -39,8 +39,8 @@ pip install -r requirements.txt
 ### Try it out
 
 ```bash
-openenv validate
-docker build -t llm-control .
+# Run the FastAPI server
+python app.py
 ```
 
 Quick Local Test Snippet:
@@ -48,12 +48,12 @@ Quick Local Test Snippet:
 import requests
 
 # Reset environment
-resp = requests.post("http://localhost:8000/reset", json={"task": "easy"})
-obs = resp.json()
+resp = requests.post("http://localhost:7860/reset", json={"task": "easy"})
+obs = resp.json()["observation"]
 print("Reset observation:", obs)
 
 # Take step
-resp = requests.post("http://localhost:8000/step", json={"action": {"action_type": "follow_prompt"}})
+resp = requests.post("http://localhost:7860/step", json={"action": {"action_type": "follow_prompt"}})
 print("Step result:", resp.json())
 ```
 

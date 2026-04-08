@@ -241,17 +241,22 @@
 
         async function resetEnv() {
             log("Sending reset sequence...");
-            const res = await fetch('/reset', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ task: "medium" })
-            });
-            const data = await res.json();
-            updateUI(data);
-            document.getElementById('reward-val').innerText = "0.00";
-            document.getElementById('reward-val').style.color = "var(--cyber-green)";
-            isDead = false;
-            log("System Reset Complete.");
+            try {
+                const res = await fetch('/reset', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ task: "medium" })
+                });
+                const data = await res.json();
+                updateUI(data.observation);
+                document.getElementById('reward-val').innerText = "0.00";
+                document.getElementById('reward-val').style.color = "var(--cyber-green)";
+                isDead = false;
+                log(`System Reset Complete. Episode ID: <span style="color:var(--cyber-blue); font-size: 0.7rem;">${data.state.episode_id}</span>`);
+            } catch (err) {
+                log("<span class='log-mi'>Error during reset. Check server console.</span>");
+                console.error(err);
+            }
         }
 
         async function takeAction(actionType) {
