@@ -85,7 +85,7 @@ def run_task(task_name: str, client: OpenAI, model_name: str):
     r = env.state.cumulative_reward
     b_min, b_max = env._reward_bounds()
     norm = (r - b_min) / (b_max - b_min)
-    score = max(0.001, min(0.999, norm))
+    score = (norm * 0.998) + 0.001
     
     print(f"[END] {score}", flush=True)
 
