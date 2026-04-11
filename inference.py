@@ -81,11 +81,11 @@ def run_task(task_name: str, client: OpenAI, model_name: str):
         action = Action(action_type=action_str)
         obs, reward, done, info = env.step(action)
         
-    # Calculate score correctly (scaled between 0 and 1 using environment's bounds)
+    # Calculate score as integer 0-100 using environment's bounds
     r = env.state.cumulative_reward
     b_min, b_max = env._reward_bounds()
     norm = (r - b_min) / (b_max - b_min)
-    score = max(0.0, min(1.0, norm))
+    score = int(max(0, min(100, norm * 100)))
     
     print(f"[END] {score}", flush=True)
 
