@@ -29,9 +29,9 @@ def evaluate_baseline():
         r = env.state.cumulative_reward
         b_min, b_max = env._reward_bounds()
         norm = (r - b_min) / (b_max - b_min)
-        score = int(max(0, min(100, norm * 100)))
+        norm = max(0.0, min(1.0, norm))
         
-        scores[task] = score
+        scores[task] = norm
         
     print(json.dumps(scores))
 

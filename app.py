@@ -127,7 +127,7 @@ async def grader(req: GraderRequest):
             r = env.state.cumulative_reward
             b_min, b_max = env._reward_bounds()
             norm = (r - b_min) / (b_max - b_min)
-            return {"score": int(max(0, min(100, norm * 100)))}
+            return {"score": max(0.0, min(1.0, norm))}
             
         raise HTTPException(status_code=404, detail="Episode not found or not finished")
         
@@ -136,9 +136,9 @@ async def grader(req: GraderRequest):
     b_min, b_max = data["bounds"]
     norm = (r - b_min) / (b_max - b_min)
     
-    # Clip to [0, 100] as integer
-    score = int(max(0, min(100, norm * 100)))
-    return {"score": score}
+    # Clip to [0, 1]
+    norm = max(0.0, min(1.0, norm))
+    return {"score": norm}
 
 @app.get("/tasks")
 async def get_tasks():
